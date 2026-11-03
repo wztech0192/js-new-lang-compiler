@@ -43,6 +43,7 @@ Array.prototype.peek = function () {
  * @param {*} trace
  */
 function parse(tokens, trace) {
+  tokens = tokens.filter((t) => t.type !== "comment");
   //pre defined function
   const storage = new Set(["print", "alert"]);
 

@@ -42,7 +42,7 @@ const rules = [
     color: "white",
   },
   {
-    lexeme: /^cond/,
+    lexeme: /^cond\b/,
     type: "cond_start",
     color: "violet",
   },
@@ -57,7 +57,7 @@ const rules = [
     color: "violet",
   },
   {
-    lexeme: /^while/,
+    lexeme: /^while\b/,
     type: "while_loop",
     color: "violet",
   },

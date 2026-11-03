@@ -18,10 +18,10 @@ document.addEventListener("DOMContentLoaded", function () {
       .replace(lexRegex, function (str) {
         for (var i = 1; i <= rules.length; i++) {
           if (arguments[i]) {
-            return `<span style="color:${rules[i - 1].color}">${str}</span>`;
+            return `<span style="color:${rules[i - 1].color}">${escapeHtml(str)}</span>`;
           }
         }
-        return str;
+        return escapeHtml(str);
       });
     highlight.innerHTML = highlighted;
   }
@@ -70,6 +70,10 @@ document.addEventListener("DOMContentLoaded", function () {
     createTraceList(traceList, trace);
   };
 });
+
+function escapeHtml(str) {
+  return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+}
 
 function createTraceList(traceList, trace = []) {
   traceList.innerHTML = "";

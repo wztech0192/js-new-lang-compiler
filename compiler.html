@@ -1,39 +1,132 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Some Language</title>
+    <meta name="theme-color" content="#16181d" />
+    <title>Weird Language</title>
     <script src="./lexer.js"></script>
     <script src="./parser.js"></script>
     <script src="./interpretator.js"></script>
     <script src="./index.js"></script>
+    <script src="./examples.js"></script>
     <link rel="stylesheet" type="text/css" href="./style.css" />
   </head>
 
   <body>
-    <div id="left">
-      <div class="container">
-        <div id="background">
-          <div id="highlight">
-            <!-- cloned text with <mark> tags here -->
+    <header class="topbar">
+      <h1>Weird Language</h1>
+      <div class="actions">
+        <select id="examples" aria-label="Load an example">
+          <option value="">Load example…</option>
+        </select>
+        <button id="run" title="Run (Ctrl+Enter)">▶ Run</button>
+      </div>
+    </header>
+
+    <main class="layout">
+      <div class="main-col">
+        <section class="panel">
+          <div class="panel-head">
+            <span>Code</span>
+            <span class="hint">Ctrl+Enter to run</span>
           </div>
-        </div>
-        <textarea id="input" spellcheck="false"></textarea>
+          <div class="container">
+            <div id="background">
+              <div id="highlight">
+                <!-- cloned text with <mark> tags here -->
+              </div>
+            </div>
+            <textarea
+              id="input"
+              spellcheck="false"
+              autocapitalize="off"
+              autocomplete="off"
+              autocorrect="off"
+              aria-label="Code editor"
+            ></textarea>
+          </div>
+        </section>
+
+        <section class="panel">
+          <div class="panel-head"><span>Output</span></div>
+          <textarea readonly id="output" aria-label="Program output"></textarea>
+        </section>
+
+        <details class="panel" id="syntax" open>
+          <summary class="panel-head">Syntax reference</summary>
+          <div class="ref-grid">
+            <div class="ref">
+              <h3>Variables</h3>
+              <code class="hl">def x = 5 def name = "Ada" x = x + 1</code>
+              <p>
+                Declare with <code>def</code> before use.
+                <code>def x</code> alone starts at 0.
+              </p>
+            </div>
+            <div class="ref">
+              <h3>Output</h3>
+              <code class="hl">print("x is " + x) alert(x)</code>
+              <p>
+                Built-in functions take one argument. <code>+</code> joins
+                strings.
+              </p>
+            </div>
+            <div class="ref">
+              <h3>Operators</h3>
+              <code class="hl"
+                >+ - * / % ^ &lt; &gt; &lt;= &gt;= == != &amp;&amp; ||</code
+              >
+              <p><code>^</code> is power. Use <code>( )</code> for grouping.</p>
+            </div>
+            <div class="ref">
+              <h3>If / else</h3>
+              <code class="hl"
+                >cond x &gt; 0 ? print("pos") ; cond x &gt; 0 ? print("pos") :
+                print("not pos") ; cond x &gt; 0 ? print("pos") : x &lt; 0 ?
+                print("neg") : print("zero") ;</code
+              >
+              <p>
+                <code>?</code> then, <code>:</code> else, <code>;</code> ends
+                the block.
+              </p>
+            </div>
+            <div class="ref">
+              <h3>While loop</h3>
+              <code class="hl">while i &lt; 3 : print(i) i = i + 1 ;</code>
+              <p><code>:</code> starts the body, <code>;</code> ends it.</p>
+            </div>
+            <div class="ref">
+              <h3>Comments</h3>
+              <code class="hl">// line comment /* block comment */</code>
+              <p>
+                Number literals are integers; strings use
+                <code>"double quotes"</code>.
+              </p>
+            </div>
+          </div>
+        </details>
       </div>
 
-      <hr />
-      <button id="run">Run</button>
-      <hr />
-      <textarea readonly id="output"></textarea>
-      <hr />
-      <h4>Defined Variable JSON</h4>
-      <pre id="var"></pre>
-    </div>
-    <ul id="virtual"></ul>
-    <hr />
-    <h4>Trace</h4>
-    <ol id="traceList"></ol>
+      <aside class="side-col">
+        <section class="panel">
+          <div class="panel-head">
+            <span>Syntax tree</span>
+            <span class="hint">click to collapse</span>
+          </div>
+          <ul id="virtual"></ul>
+        </section>
+
+        <section class="panel">
+          <div class="panel-head"><span>Variables</span></div>
+          <pre id="var"></pre>
+        </section>
+
+        <details class="panel">
+          <summary class="panel-head">Parser trace</summary>
+          <ol id="traceList"></ol>
+        </details>
+      </aside>
+    </main>
   </body>
 </html>
